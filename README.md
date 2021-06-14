@@ -1,3 +1,3 @@
-# [slick-and-clean-javascript](https://slick-and-clean-javascript.now.sh)
+# [Presentasi Pratesis](https://presentasi-asyrofi.vercel.app/)
 
-Clean code concepts, tips and tricks on writing JavaScript - Sunday, 27 October 2019
+Berikut ini adalah presentasi pra tesis Pascasarjana ITS - Rabu, 16 Juni 2021
