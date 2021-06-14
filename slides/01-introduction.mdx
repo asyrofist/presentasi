@@ -1,99 +1,78 @@
 import { Appear, Embed, Notes } from 'mdx-deck'
 import { CodeSurferLayout } from 'code-surfer'
 
-## 👨‍🌾 [Slick and Clean JavaScript](.)
+##### 👨‍🌾 [Tesis Pascasarjana S2 Teknik Informatika ITS](.)
 
-Clean code concepts, tips and <br /> tricks on writing JavaScript
+Ekstraksi Kebergatungan Evolutionary Requirements antar kebutuhan dengan pemrosesan bahasa alamiah
 
-###### SurabayaDev x SurabayaJS <br /> Sunday, 27 October 2019
-
-###### [twitter.com/griko_nibras](https://twitter.com/griko_nibras)
+###### Diusulkan oleh Rakha Asyrofi / 05111950010038
+###### Dibimbing oleh Daniel Oranova Siahaan, S.Kom., M.Sc., PD.Eng 
+###### NIP. 19741123 200604 1 001
 
 ---
 
-# Spoiler ✨
+# Table of Contents
+- Latar Belakang ✨
+- Penelitian sebelumnya 👨‍💻
+- Penggalian Ulasan Model Kebergatungan 🙅
+- Metode Penelitian 🙇
+- Dokumentasi dan Pengujian 👏
+  [more..](https://docs.google.com/presentation/d/1e4VAUfFaBRF3XnRbdTLZm9w3-YV45a766G0QadqiEM8/edit?usp=sharing)
 
 ---
 
 <CodeSurferLayout>
 
-```js
-const yyyymmdstr = moment().format('YYYY/MM/DD')
+
+```python
+# fungsi ini untuk mengecek data preprocessing
+def preprocessing(index0):
+  x1 = pd.ExcelFile(index0)
+  dfs = {sh:x1.parse(sh) for sh in x1.sheet_names}
+  return dfs
+
+
 ```
 
-```js
-const yyyymmdstr = moment().format('YYYY/MM/DD')
-const currentDate = moment().format('YYYY/MM/DD')
+```python
+# fungsi ini digunakan untuk mengecek data secara keseluruhan dataset tertentu
+def fulldataset(index0, index1):
+  x1 = pd.ExcelFile(index0)
+  dfs = {sh:x1.parse(sh) for sh in x1.sheet_names}[index1]
+  return dfs
+
 ```
 
-```js
-const yyyymmdstr = moment().format('YYYY/MM/DD')
-const currentDate = moment().format('YYYY/MM/DD')
-const date = moment().format('YYYY/MM/DD')
+```python
+# fungsi ini digunakan untuk melihat data excel yang spesifik
+def dataset(index0, index1, index2, index3):
+  x1 = pd.ExcelFile(index0)
+  dfs = {sh:pd.x1.parse(sh) for sh in pd.x1.sheet_names}[index1][index2][index3]
+  return dfs
+
 ```
 
-```js 1:3
-const yyyymmdstr = moment().format('YYYY/MM/DD')
-const currentDate = moment().format('YYYY/MM/DD')
-const date = moment().format('YYYY/MM/DD')
+```python
+
+# cleaning text
+def apply_cleaning_function_to_list(X):
+    cleaned_X = []
+    for element in X:
+        cleaned_X.append(clean_text(element))
+    return cleaned_X
+
+```
+
+```python
+def clean_text(raw_text):    
+    text = raw_text.lower() # Convert to lower case
+    tokens = nltk.word_tokenize(text) # Tokenize    
+    token_words = [w for w in tokens if w.isalpha()] # Keep only words (removes punctuation + numbers)    
+    lemma_words = [lem.lemmatize(w) for w in token_words] # Lemmatization
+    meaningful_words = [w for w in lemma_words if not w in stops] # Remove stop words
+    joined_words = ( " ".join(meaningful_words)) # Rejoin meaningful stemmed words
+    return joined_words
+
 ```
 
 </CodeSurferLayout>
-
----
-
-# Hello there 👋
-
-<ul>
-  <Appear>
-    <li>
-      My name is{' '}
-      <b>
-        <a href='https://griko.id'>Griko Muhammad Sultan Nibras</a>
-      </b>
-    </li>
-    <li>
-      Or just <b>Griko Nibras</b> if it's too long
-    </li>
-    <li>
-      Still haven't finished my thesis at <b>ITATS</b>
-    </li>
-    <li>
-      Just made this deck <b>12 hours before prime time</b>
-    </li>
-  </Appear>
-</ul>
-
-<Notes>{''}</Notes>
-
----
-
-# This deck is about... 👨‍💻
-
-- Software engineering principles from <br />
-  various sources
-- Guide to producing readable, reusable, <br />
-  and refactorable software
-- [Going and staying sane with JavaScript](https://docs.google.com/presentation/d/10jtuDrZOgNNyFUegIkbZJaNeFUwgPqJ_kQ2asZCy2R0/edit?usp=sharing)
-
----
-
-# This deck isn't about... 🙅
-
-- JavaScript writing style guide
-- Following every principle
-- Making you a better software developer
-
----
-
-# Before we start... 🙇
-
-- Not every principle has to be strictly followed
-- These are guidelines and nothing more
-- Link resources will be shown at the end
-
----
-
-###### Now that's out of the way, let's start 👏
-
-![gif](https://media.giphy.com/media/9DGFdfnT6SJSE/giphy.gif)

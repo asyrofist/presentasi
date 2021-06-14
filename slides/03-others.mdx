@@ -1,160 +1,109 @@
 import { Appear, Embed, Notes } from 'mdx-deck'
 import { CodeSurferLayout } from 'code-surfer'
 
-## Benefits of Clean Code 🙉
+# Pengujian Entailment
+- Pendahuluan ✨
+- Entailment Tekstual Berdasarkan Metode LSTM 🙅
+- HasilPercobaan 🙇
+  [more..](https://docs.google.com/presentation/d/19bBFYP8DZMF8us6wNJlyfev5P_Lkt7nlnEJT2MSJ_R0/edit?usp=sharing)
 
-<ul>
-  <Appear>
-    <li>Easier to understand going forward</li>
-    <li>
-      Essential for creating a successful <br /> maintainable product
-    </li>
-    <li>Clean code keeps you sane 🤪</li>
-  </Appear>
-</ul>
-
----
-
-###### Speaking of sane...
-
----
-
-![gswjs](https://api-da.wixmp.com/_api/download/file?downloadToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImV4cCI6MTU3MjE3MTkzMSwiaWF0IjoxNTcyMTUwMzIxLCJqdGkiOiI1ZGI1MWMzYjY1NjdjIiwib2JqIjpudWxsLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdLCJwYXlsb2FkIjp7InBhdGgiOiJcL2ZcL2JiNzcwMjA3LTc1ZjAtNDU1MS04OWVhLTg3ODc4MjM0ZGFiOVwvZGRqNTc3Yy01NThjZDYxZC03YjYzLTQ3ZTUtODYyYS1hMzY1Y2UwODI0ZmMucG5nIn19.N9q_N8yT4896KmXonu6DzUF8jLJ50a9XCcPyPc1Xxb8)
-
----
-
-![rb](https://api-da.wixmp.com/_api/download/file?downloadToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImV4cCI6MTU3MjE3MTkzMiwiaWF0IjoxNTcyMTUwMzIyLCJqdGkiOiI1ZGI1MWMzYzBlZGExIiwib2JqIjpudWxsLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdLCJwYXlsb2FkIjp7InBhdGgiOiJcL2ZcL2JiNzcwMjA3LTc1ZjAtNDU1MS04OWVhLTg3ODc4MjM0ZGFiOVwvZGRqNTc3NC01YTUxMTQ5MS1jNmM5LTQzNzItYWMxZC1jNDk2OTI3MjcxODcucG5nIn19.6tco6oKpukp-E2zRKko65DGGq6CiywOvuXgl9X5yCBc)
-
----
-
-## ⚡ List of weird APIs
-
-<ul>
-  <Appear>
-    <li>URL</li>
-    <li>History</li>
-    <li>Canvas rendering</li>
-    <li>Keyboard event</li>
-    <li>...and many many others</li>
-  </Appear>
-</ul>
 
 ---
 
 <CodeSurferLayout>
 
-```js
-URL(url, [base])
+```python
+def unzip_single_file(zip_file_name, output_file_name):
+    if not os.path.isfile(output_file_name):
+        with open(output_file_name, 'wb') as out_file:
+            with zipfile.ZipFile(zip_file_name) as zipped:
+                for info in zipped.infolist():
+                    if output_file_name in info.filename:
+                        with zipped.open(info) as requested_file:
+                            out_file.write(requested_file.read())
+                            return
+```
+```python
+def sentence2sequence(sentence):
+    tokens = sentence.lower().split(" ")
+    rows = []
+    words = []
+    #Greedy search for tokens
+    for token in tokens:
+        i = len(token)
+        while len(token) > 0 and i > 0:
+            word = token[:i]
+            if word in glove_wordmap:
+                rows.append(glove_wordmap[word])
+                words.append(word)
+                token = token[i:]
+                i = len(token)
+            else:
+                i = i-1
+    return rows, words
+
+```
+```python
+def visualize(sentence):
+    rows, words = sentence2sequence(sentence)
+    print(rows)
+    mat = np.vstack(rows)
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    shown = ax.matshow(mat, aspect="auto")
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
+    fig.colorbar(shown)
+    ax.set_yticklabels([""]+words)
+    plt.show()
+
 ```
 
-```js
-URL(url, [base])
+```python
+def score_setup(row):
+    convert_dict = {
+      'entailment': 0,
+      'neutral': 1,
+      'contradiction': 2
+    }
+    score = np.zeros((3,))
+    for x in range(1,6):
+        tag = row["label"+str(x)]
+        if tag in convert_dict: score[convert_dict[tag]] += 1
+    return score / (1.0*np.sum(score))
 
-new URL('example.com') // ❌
+def fit_to_size(matrix, shape):
+    res = np.zeros(shape)
+    slices = [slice(0,min(dim,shape[e])) for e, dim in enumerate(matrix.shape)]
+    res[slices] = matrix[slices]
+    return res
+
 ```
 
-```js
-URL(url, [base])
+```python
+def split_data_into_scores():
+    import csv
+    # with open("snli_1.0_dev.txt","r") as data:
+    with open("/content/drive/MyDrive/RE_dependency/snli_1.0_dev.txt","r") as data:
+        train = csv.DictReader(data, delimiter='\t')
+        evi_sentences = []
+        hyp_sentences = []
+        labels = []
+        scores = []
+        for row in train:
+            hyp_sentences.append(np.vstack(
+                    sentence2sequence(row["sentence1"].lower())[0]))
+            evi_sentences.append(np.vstack(
+                    sentence2sequence(row["sentence2"].lower())[0]))
+            labels.append(row["gold_label"])
+            scores.append(score_setup(row))
+        
+        hyp_sentences = np.stack([fit_to_size(x, (max_hypothesis_length, vector_size))
+                          for x in hyp_sentences])
+        evi_sentences = np.stack([fit_to_size(x, (max_evidence_length, vector_size))
+                          for x in evi_sentences])
+                                 
+        return (hyp_sentences, evi_sentences), labels, np.array(scores)
 
-new URL('example.com') // ❌
-new URL('www.example.com') // ❌
-```
-
-```js
-URL(url, [base])
-
-new URL('example.com') // ❌
-new URL('www.example.com') // ❌
-new URL('http://www.example.com') // ✅
 ```
 
 </CodeSurferLayout>
-
----
-
-<CodeSurferLayout>
-
-```js
-history.pushState(data, title, [url])
-```
-
-```js
-history.pushState(data, title, [url])
-
-history.pushState(null, '', 'http://www.example.com') // ✅
-```
-
-```js
-history.pushState(data, title, [url])
-
-history.pushState(null, '', 'http://www.example.com') // ✅
-
-history.pushState('http://www.example.com') // ❌
-```
-
-</CodeSurferLayout>
-
----
-
-<CodeSurferLayout>
-
-<!-- prettier-ignore-start -->
-
-```js
-ctx.arc(x, y, radius, startAngle, endAngle [, anticlockwise])
-```
-
-```js
-ctx.arc(x, y, radius, startAngle, endAngle [, anticlockwise])
-
-ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle [, anticlockwise])
-```
-
-```js
-ctx.arc(x, y, radius, startAngle, endAngle [, anticlockwise])
-
-ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle [, anticlockwise])
-
-kbdEvent.initKeyboardEvent(typeArg, canBubbleArg, cancelableArg,
-                           viewArg, charArg, keyArg,
-                           locationArg, modifiersListArg, repeat)
-```
-
-```js
-ctx.arc(x, y, radius, startAngle, endAngle [, anticlockwise])
-
-ctx.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle [, anticlockwise])
-
-kbdEvent.initKeyboardEvent(typeArg, canBubbleArg, cancelableArg,
-                           viewArg, charArg, keyArg,
-                           locationArg, modifiersListArg, repeat)
-
-event.initKeyEvent (type, bubbles, cancelable, viewArg,
-                    ctrlKeyArg, altKeyArg, shiftKeyArg, metaKeyArg,
-                    keyCodeArg, charCodeArg)
-```
-
-<!-- prettier-ignore-end -->
-
-</CodeSurferLayout>
-
----
-
-![what](https://media.giphy.com/media/g1a84q6RBSMrS/giphy.gif)
-
----
-
-# Things to remember 👨‍🔬
-
-- Use sensible defaults
-- Organize parameter orders (2 or 3 params max)
-- Don't trap parameters
-
----
-
-# Prettify your code 👩‍🎤
-
-- Consistent formatting using code formatters <br />
-  such as [prettier](https://prettier.io)
-- Add git hooks to format codes before commits <br />
-  or pushing using [husky](https://github.com/typicode/husky)
