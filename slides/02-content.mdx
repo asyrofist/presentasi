@@ -14,7 +14,8 @@ import { CodeSurferLayout } from 'code-surfer'
 ```python
 def word2vec():
     sentences = [sentence.split() for sentence in cleaned_text] #requirement statement
-    modelWord2vec = Word2Vec(sentences = sentences, size = len(sentences), sg = 1, window = 2, min_count = 1, iter = 10, workers = Pool()._processes)
+    modelWord2vec = Word2Vec(sentences = sentences, size = len(sentences), sg = 1, window = 2, \
+                             min_count = 1, iter = 10, workers = Pool()._processes)
     modelWord2vec.init_sims(replace = True)
     ordered_vocab = [(term, voc.index, voc.count) for term, voc in modelWord2vec.wv.vocab.items()]
     ordered_vocab = sorted(ordered_vocab, key=lambda k: k[2])
