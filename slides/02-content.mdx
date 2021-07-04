@@ -49,53 +49,7 @@ class wmdistance(object):
         self.w2v_model = KeyedVectors.load_word2vec_format(self.w2v_path, limit=300000, binary=True)
 
 ```
-
-```python
-
-    def createWmdDataset(self, sent):
-        return [wrd for wrd in sent.split() if wrd not in self.stopwords]
-
-    def getWmDistance(self, sent_1, sent_2):
-        distance = ''
-        try:
-            sent_1 = self.createWmdDataset(sent_1)
-            sent_2 = self.createWmdDataset(sent_2)
-            distance = self.w2v_model.wmdistance(sent_1, sent_2)
-
-            print("\n the word movers distance is => ",distance)
-        except Exception as e:
-            print("\n Error in getWmDistance --- ", e, "\n", traceback.format_exc())
-        return distance
-
-```
-
-```python
-class DocSim:
-    def __init__(self, w2v_model, stopwords=None):
-        self.w2v_model = w2v_model
-        self.stopwords = stopwords if stopwords is not None else []
-
-    def vectorize(self, doc: str) -> np.ndarray:
-        doc = doc.lower()
-        words = [w for w in doc.split(" ") if w not in self.stopwords]
-        word_vecs = []
-        for word in words:
-            try:
-                vec = self.w2v_model[word]
-                word_vecs.append(vec)
-            except KeyError:                
-                pass # Ignore, if the word doesn't exist in the vocabulary
-        vector = np.mean(word_vecs, axis=0)
-        return vector
-
-    def _cosine_sim(self, vecA, vecB):
-        """Find the cosine similarity distance between two vectors."""
-        csim = np.dot(vecA, vecB) / (np.linalg.norm(vecA) * np.linalg.norm(vecB)) 
-        if np.isnan(np.sum(csim)):
-            return 0
-        return csim
-```
-
+  
 ```python
     def euclidean_dist(self, vec1, vec2):
         return np.sqrt(np.sum((vec1-vec2)**2))
