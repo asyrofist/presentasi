@@ -18,5 +18,8 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mdx-deck-live-code": "^1.0.1"
+  }
 }

@@ -9,6 +9,12 @@ Ekstraksi Kebergatungan Evolutionary Requirements antar kebutuhan dengan pemrose
 ###### Dibimbing oleh Daniel Oranova Siahaan, S.Kom., M.Sc., PD.Eng 
 ###### NIP. 19741123 200604 1 001
 
+<Notes>
+Baik terima kasih, sebelumnya atas waktu bapak/ibu luangkan untuk mendengar presentasi tesis saya.
+Yang berjudul Ekstraksi Kebergatungan Evolutionary Requirements antar kebutuhan dengan pemrosesan bahasa alamiah
+yang disusun oleh saya sendiri Rakha Asyrofi, dengan bimbingan bapak Daniel Oranova Siahaan selaku dosen pembimbing saya
+</Notes>
+
 ---
 
 # Daftar Isi
@@ -19,23 +25,23 @@ Ekstraksi Kebergatungan Evolutionary Requirements antar kebutuhan dengan pemrose
 - Dokumentasi dan Pengujian
   [...](https://docs.google.com/presentation/d/1e4VAUfFaBRF3XnRbdTLZm9w3-YV45a766G0QadqiEM8/edit?usp=sharing)
 
+<Notes>
+Saya mulai dari daftar isi yang akan saya sampaikan dimulai dari latar Belakang, penelitian sebelumnya,
+Penggalian Ulasan model kebergantungan, metode penelitian dan dokumentasi serta pengujian yang telah dikerjakan.
+</Notes>
+
 ---
 
 <CodeSurferLayout>
 
-
 ```python
-# fungsi ini untuk mengecek data preprocessing
 def preprocessing(index0):
   x1 = pd.ExcelFile(index0)
   dfs = {sh:x1.parse(sh) for sh in x1.sheet_names}
   return dfs
-
-
 ```
 
 ```python
-# fungsi ini digunakan untuk mengecek data secara keseluruhan dataset tertentu
 def fulldataset(index0, index1):
   x1 = pd.ExcelFile(index0)
   dfs = {sh:x1.parse(sh) for sh in x1.sheet_names}[index1]
@@ -44,23 +50,19 @@ def fulldataset(index0, index1):
 ```
 
 ```python
-# fungsi ini digunakan untuk melihat data excel yang spesifik
 def dataset(index0, index1, index2, index3):
   x1 = pd.ExcelFile(index0)
   dfs = {sh:pd.x1.parse(sh) for sh in pd.x1.sheet_names}[index1][index2][index3]
   return dfs
-
 ```
 
 ```python
 
-# cleaning text
 def apply_cleaning_function_to_list(X):
     cleaned_X = []
     for element in X:
         cleaned_X.append(clean_text(element))
     return cleaned_X
-
 ```
 
 ```python
@@ -72,7 +74,6 @@ def clean_text(raw_text):
     meaningful_words = [w for w in lemma_words if not w in stops] # Remove stop words
     joined_words = ( " ".join(meaningful_words)) # Rejoin meaningful stemmed words
     return joined_words
-
 ```
 
 </CodeSurferLayout>
