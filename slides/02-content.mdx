@@ -12,24 +12,24 @@ import { CodeSurferLayout } from 'code-surfer'
 <CodeSurferLayout>
 
 ```python
-def build_lexicon(corpus):
-    lexicon = set()
-    for doc in corpus:
-        lexicon.update([word for word in doc])
-    return lexicon
+def word2vec():
+    sentences = [sentence.split() for sentence in cleaned_text] #requirement statement
+    modelWord2vec = Word2Vec(sentences = sentences, size = len(sentences), sg = 1, window = 2, min_count = 1, iter = 10, workers = Pool()._processes)
+    modelWord2vec.init_sims(replace = True)
+    ordered_vocab = [(term, voc.index, voc.count) for term, voc in modelWord2vec.wv.vocab.items()]
+    ordered_vocab = sorted(ordered_vocab, key=lambda k: k[2])
+    ordered_terms, term_indices, term_counts = zip(*ordered_vocab)
+    word_vectors = pd.DataFrame(modelWord2vec.wv.syn0[term_indices, :], index=ordered_terms, columns= id_requirement)
+    vektor_word = word_vectors.T
+    return vektor_word
 ```
-  
-```python
-# define a function that computes cosine similarity between two words
-def cosine_similarity(v1, v2):
-    return 1 - spatial.distance.cosine(v1, v2)
-
-```
-
-```python
-def euclidean_dist(vec1, vec2):
-    return np.sqrt(np.sum((vec1-vec2)**2))
-```
+def tableWord2vec():
+    tabelWord2vec = []
+    for num in range(0, len(cleaned_text)):
+      a = [modelWord2vec.wmdistance(cleaned_text[num].split(), cleaned_text[angka].split()) for angka in range(0, len(cleaned_text))]
+      tabelWor2vec.append(a)
+    word2vecResult = pd.DataFrame(coba, index = id_requirement, columns = id_requirement)
+    return word2vecResult
 
 ```python
 
