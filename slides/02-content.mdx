@@ -28,7 +28,8 @@ def word2vec():
 def tableWord2vec():
     tabelWord2vec = []
     for num in range(0, len(cleaned_text)):
-      a = [modelWord2vec.wmdistance(cleaned_text[num].split(), cleaned_text[angka].split()) for angka in range(0, len(cleaned_text))]
+      a = [modelWord2vec.wmdistance(cleaned_text[num].split(), cleaned_text[angka].split()) \ 
+            for angka in range(0, len(cleaned_text))]
       tabelWor2vec.append(a)
     word2vecResult = pd.DataFrame(coba, index = id_requirement, columns = id_requirement)
     return word2vecResult
