@@ -33,11 +33,11 @@ def euclidean_dist(vec1, vec2):
 
 ```python
 
-class wmdistance(object):
+  class wmdistance(object):
     
     def __init__(self):
         self.stopwords = stopwords.words('english')
-        self.w2v_path = '/content/drive/MyDrive/RE_dependency/GoogleNews-vectors-negative300.bin.gz'
+        self.w2v_path = 'GoogleNews-vectors-negative300.bin.gz'
         self.loadW2V()
         self.w2v_model.init_sims(replace=True)
         print("\nloaded word2vec model : ")
@@ -46,48 +46,26 @@ class wmdistance(object):
     def loadW2V(self):
         if not os.path.exists(self.w2v_path):
             raise ValueError("SKIP: You need to download the google news model")
-        self.w2v_model = KeyedVectors.load_word2vec_format(self.w2v_path, limit=300000, binary=True)
-
+        self.w2v_model = KeyedVectors.load_word2vec_format(self.w2v_path, limit=300000, binary=True)  
 ```
   
 ```python
-    def euclidean_dist(self, vec1, vec2):
-        return np.sqrt(np.sum((vec1-vec2)**2))
 
+    def createWmdDataset(self, sent):
+        return [wrd for wrd in sent.split() if wrd not in self.stopwords]
 
-    def calculate_similarity(self, source_doc, target_docs=None, threshold=0):
-        """Calculates & returns similarity scores between given source document & all
-        the target documents."""
-        if not target_docs:
-            return []
+    def getWmDistance(self, sent_1, sent_2):
+        distance = ''
+        try:
+            sent_1 = self.createWmdDataset(sent_1)
+            sent_2 = self.createWmdDataset(sent_2)
+            distance = self.w2v_model.wmdistance(sent_1, sent_2)
 
-        if isinstance(target_docs, str):
-            target_docs = [target_docs]
-            print(target_docs)
+            print("\n the word movers distance is => ",distance)
+        except Exception as e:
+            print("\n Error in getWmDistance --- ", e, "\n", traceback.format_exc())
+        return distance
 
-        source_vec = self.vectorize(source_doc)
-        results = []
-        for doc in target_docs:
-            target_vec = self.vectorize(doc)
-            sim_score = self.euclidean_dist(source_vec, target_vec)
-            if sim_score > threshold:
-                results.append({"score": sim_score, "doc": doc})
-            # Sort results by score in desc order
-            results.sort(key=lambda k: k["score"], reverse=False)
-
-        return results
-
-
+  
 ```
-
-```python
-def sent_to_words(sentences):
-    for sentence in sentences:
-        # deacc=True removes punctuations
-        yield(gensim.utils.simple_preprocess(str(sentence), deacc=True))
-def remove_stopwords(texts):
-    return [[word for word in simple_preprocess(str(doc)) 
-             if word not in stop_words] for doc in texts]
-```
-
 </CodeSurferLayout>
