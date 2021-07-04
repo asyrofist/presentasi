@@ -15,7 +15,7 @@ dan word mover distance (WMD) dan hasil pengujiannya
 ---
 <CodeSurferLayout>
 
-```python
+```python subtitle='function untuk menggunakan word2vec'
 def word2vec():
     sentences = [sentence.split() for sentence in cleaned_text] #requirement statement
     modelWord2vec = Word2Vec(sentences = sentences, size = len(sentences), sg = 1, window = 2, \
@@ -30,7 +30,7 @@ def word2vec():
 
 ```
 
-```python
+```python subtitle='function untuk membuat tabel word2vec'
 def tableWord2vec():
     tabelWord2vec = []
     for num in range(0, len(cleaned_text)):
@@ -41,8 +41,7 @@ def tableWord2vec():
     return word2vecResult
 ```
   
-```python
-
+```python subtitle='class function untuk menghitung dengan WMD'
   class wmdistance(object):
     def __init__(self):
         self.stopwords = stopwords.words('english')
@@ -58,8 +57,7 @@ def tableWord2vec():
 
 ```
   
-```python
-
+```python 
     def createWmdDataset(self, sent):
         return [wrd for wrd in sent.split() if wrd not in self.stopwords]
 

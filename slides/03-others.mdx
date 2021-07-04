@@ -14,7 +14,7 @@ entailment Tekstual berdasarkan metode LSTM, dan hasil HasilPercobaan yang telah
 
 <CodeSurferLayout>
 
-```python
+```python subtitle='function untuk membuka setiap file'
 def unzip_single_file(zip_file_name, output_file_name):
     if not os.path.isfile(output_file_name):
         with open(output_file_name, 'wb') as out_file:
@@ -27,7 +27,7 @@ def unzip_single_file(zip_file_name, output_file_name):
 
 ```
 
-```python
+```python subtitle='function untuk merubah kalimat menjadi sequence'
 def sentence2sequence(sentence):
     tokens = sentence.lower().split(" ")
     rows = []
@@ -47,7 +47,7 @@ def sentence2sequence(sentence):
     return rows, words
 ```
 
-```python
+```python subtitle='function untuk memvisualisasikan'
 def visualize(sentence):
     rows, words = sentence2sequence(sentence)
     print(rows)
@@ -62,7 +62,7 @@ def visualize(sentence):
 
 ```
 
-```python
+```python subtitle='function untuk menghasilkan sebuah nilai dan fitting'
 def score_setup(row):
     convert_dict = {
       'entailment': 0,
@@ -75,18 +75,17 @@ def score_setup(row):
         if tag in convert_dict: score[convert_dict[tag]] += 1
     return score / (1.0*np.sum(score))
 
-def fit_to_size(matrix, shape):
+def fit_to_size(matrix, shape): 
     res = np.zeros(shape)
     slices = [slice(0,min(dim,shape[e])) for e, dim in enumerate(matrix.shape)]
     res[slices] = matrix[slices]
     return res
 ```
 
-```python
+```python subtitle='function untuk splitting data menjadi sebuah score'
 def split_data_into_scores():
     import csv
-    # with open("snli_1.0_dev.txt","r") as data:
-    with open("/content/drive/MyDrive/RE_dependency/snli_1.0_dev.txt","r") as data:
+    with open("snli_1.0_dev.txt","r") as data:
         train = csv.DictReader(data, delimiter='\t')
         evi_sentences = []
         hyp_sentences = []
@@ -106,7 +105,6 @@ def split_data_into_scores():
                           for x in evi_sentences])
                                  
         return (hyp_sentences, evi_sentences), labels, np.array(scores)
-
 ```
 
 </CodeSurferLayout>
