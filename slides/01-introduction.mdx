@@ -74,5 +74,12 @@ def clean_text(raw_text):
     joined_words = ( " ".join(meaningful_words)) # Rejoin meaningful stemmed words
     return joined_words
 ```
+  
+```python subtitle='function untuk mencari similaritas'
+def ukurSimilaritas(req1, req2):    
+    for num in req1:
+      dataSimilartas = [metodeSimilaritas(num, index) for index in req2]
+      return dataSimilaritas
+```
 
 </CodeSurferLayout>
