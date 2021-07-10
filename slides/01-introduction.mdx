@@ -34,6 +34,13 @@ Penggalian Ulasan model kebergantungan, metode penelitian dan dokumentasi serta 
 
 <CodeSurferLayout>
 
+```python subtitle='function untuk melakukan parsing'
+def parsing(data):
+    from nltk.parse.corenlp import CoreNLPParser
+    parser = CoreNLPParser(url='http://corenlp.run/')
+    next(parser.raw_parse(data)).pretty_print()
+```
+  
 ```python subtitle='function untuk melakukan preprocessing'
 def preprocessing(index0):
   x1 = pd.ExcelFile(index0)
