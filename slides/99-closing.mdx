@@ -1,14 +1,14 @@
 import { Appear, Embed, Notes } from 'mdx-deck'
 import { CodeSurferLayout } from 'code-surfer'
 
-# Pengujian Relasi
-- Pemetaan Aktor, Usecase, dan Relasinya
-- Pemetaan Berkas XMI dan Deskripsi Usecase
-- Pemetaan Relasi Gabungan XMI-UCD [...](https://docs.google.com/presentation/d/1Kg4DxQiV2NNXTzUH_kgJb3Ev2fkzqCArpXJnJrtt2tE/edit?usp=sharing)
+# Hasil dan Pembahasan
+- Dataset Pengujian
+- Pengujian relasi partOf antar kebutuhan
+- Pengujian relasi include dan extend pada kasus penggunaan
+- Memvisualisasikan Graf Kebergantungan Kebutuhan[...](https://docs.google.com/presentation/d/1Kg4DxQiV2NNXTzUH_kgJb3Ev2fkzqCArpXJnJrtt2tE/edit?usp=sharing)
 
 <Notes>
-Dan terakhir skenario pengujian 3. Dalam pengujian relasi ini, penulis telah dapat memetakan aktor, usecase dan relasinya.
-serta pemetaan berkas XMI dan deskripsi usecase serta hasil gabungan relasi XMI-UCD tersebut.
+Dan terakhir membahas seputar hasil yang telah dilakukan untuk menguji relasi partOf, include, dan extend, serta memvisualisasikan Graf Kebergantungan Kebutuhan tersebut.
 </Notes>
 
 ---
@@ -16,18 +16,16 @@ serta pemetaan berkas XMI dan deskripsi usecase serta hasil gabungan relasi XMI-
 # Kesimpulan
 <ul>
   <Appear>
-    <li>Untuk mendeteksi kebergantungan antar kebutuhan dapat dilakukan dengan pembobotan kata word2vec</li>
-    <li>pengujian kebergantungan antar kebutuhan menggunakan entaiment</li>
-    <li>pengujian semantik dengan nilai threshold yang ditentukan</li>
-    <li>Adapun, pengujian dengan pemetaan berkas XMI dan UCD lebih baik dalam pemetaan kebergantungan kebutuhan.</li>
+    <li>Dapat menentukan jenis kebergantungan partOf, include, dan extend </li>
+    <li>Dapat mengekstraksi jenis kebergantungan partOf, include, dan extend pada dokumen SKPL dan Diagram Kasus Penggunaan</li>
+    <li>Dapat memvisualisasikan Graf Kebergantungan Kebutuhan</li>
   </Appear>
 </ul>
 
 <Notes>
 Maka dari hasil pengujian tersebut dapat disimpulkan bahwa, peneliti telah dapat mendeketeksi 
-kebergantungan antar kebutuhan melalui pembobotan kata menggunakan word2vec. kebergantungan kebutuhan menggunakan entailment
-serta mampu menguji nilai semantik berdasarkan nilai threshold yang ditentukan.
-Setelah dikaji, maka pemetaan berkas XMI dan UCD lebih baik dalam pemetaan kebergantungan kebutuhan tersebut. 
+kebergantungan antar kebutuhan. Setelah dikaji, maka ekstraksi berkas XMI dan UCD telah dapat dilakukan untuk mendeteksi kebergantungan antar kebutuhan tersebut.
+Saran dari peneliti, untuk mengembangkaan metode lebih baik dan cepat. Sebab algoritma yang digunakan cenderung lambat dalam memproses data.
 </Notes>
 
 
@@ -36,9 +34,11 @@ Setelah dikaji, maka pemetaan berkas XMI dan UCD lebih baik dalam pemetaan keber
 # Referensi 🔖
 
 [publikasi ilmiah](https://ieeexplore.ieee.org/document/9315489)
+[zenodo_library](https://zenodo.org/record/5528399)
+[pypi_package](https://pypi.org/project/extractreq/)
 
 <Notes>
-Berikut ini adalah referensi yang telah dipublikasikan oleh penulis. 
+Berikut ini adalah referensi yang telah dipublikasikan dan source code yang tleah dikembangkan oleh penulis 
 </Notes>
 
 
